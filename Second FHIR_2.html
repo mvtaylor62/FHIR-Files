@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+    <title>XMLHttpRequest</title>
+    <script>
+        var url="https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/Encounter?patient=4342010";
+        var xmlhttp;
+        
+        window.onload=function()
+        {
+            xmlhttp= new XMLHttpRequest();
+            xmlhttp.onreadystatechange = process;
+            xmlhttp.open("GET", url, true)
+            xmlhttp.setRequestHeader("Accept", "application/json");
+            xmlhttp.send();
+        }
+        
+        function process()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status == 200)
+               {
+                    var encounter = JSON.parse(xmlhttp.responseText);
+                    console.log(encounter.entry["0"].resource.class);
+               }
+        }
+    </script>
+
+</head>
+<body>
+    <div id="result">
+    </div>
+</body>
